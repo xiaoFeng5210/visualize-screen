@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>大屏可视化项目</title>
+  <script>
+    // 获取设备（当前浏览器）宽度 高度
+    const equipmentWidth = document.documentElement.clientWidth;
+    const equipmentHeight = document.documentElement.clientHeight;
+    // 页面宽度
+    let pageWidth;
+    if (equipmentWidth / equipmentHeight > 16 / 9) {
+      pageWidth = equipmentHeight * (16 / 9);
+    } else {
+      pageWidth = equipmentWidth;
+    }
+    const pageHeight = pageWidth / (16 / 9);
+    // 保证1rem 永远等于有效宽度的1%
+    const string = `<style>html {
+      font-size: ${pageWidth / 100}px
+    }</style>`
+    document.write(string);
+
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    root.style.width = pageWidth + 'px';
+    root.style.height = pageHeight + 'px';
+    root.style.marginTop = (equipmentHeight - pageHeight) / 2 + 'px';
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
